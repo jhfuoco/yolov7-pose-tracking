@@ -183,9 +183,12 @@ def main(source):
         with open(save_path.split('.')[0]+'.json', 'w') as f:
                 json.dump(results, f, indent=4) 
 
+def process_directory(directory_path):
+    # 디렉터리 내의 모든 파일을 순회
+    for path in Path(directory_path).rglob('*.MOV'):
+        main(str(path))
 
 if __name__ == '__main__':
-    # source = 'test.mp4'
-    source = '/Users/jihoon/venvs/yolov7-pose-tracking/example_j/경은_LB_H1.MOV'
+    directory_path = '/Users/jihoon/venvs/yolov7-pose-tracking/video/'
     with torch.no_grad():
-        main(source)
+        process_directory(directory_path)
